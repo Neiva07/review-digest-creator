@@ -2,31 +2,24 @@ package persistence
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"time"
 
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func init() {
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost"))
-	if err != nil {
-		log.Fatal(err)
-	}
+var DB *mongo.Database = initiateDatabase()
 
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err = client.Connect(ctx)
+func initiateDatabase() *mongo.Database {
+	opt := options.Client().ApplyURI("mongodb://localhost:27017")
+	ctx, cancel := context.WithTimeout(context.TODO(), 10*time.Second)
+	defer cancel()
+	client, err := mongo.Connect(ctx, opt)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err.Error())
 	}
-	defer client.Disconnect(ctx)
+	log.Println("Initiating the database...")
 
-	databases, err := client.ListDatabaseNames(ctx, bson.M{})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(databases)
+	return client.Database("ReviewDigestCreator")
 }
