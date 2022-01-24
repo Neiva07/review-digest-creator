@@ -13,8 +13,8 @@ The REST APIs can be seen below.
 
 |                 |Route                            |VERB                        |
 |---------------- |---------------------------------|----------------------------|
-|Create App Digest|`/api/applicationDigests/{appId}`|            POST            |
-|Delete App Digest|`/api/applicationDigests/{appId}`|            DELETE          |
+|Create App Digest|`/api/application-digests/{appId}`|            POST            |
+|Delete App Digest|`/api/application-digests/{appId}`|            DELETE          |
 
 The body of `create` api sets the configuration for the Digests.
 

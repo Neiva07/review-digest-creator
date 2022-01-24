@@ -14,8 +14,8 @@ func main() {
 	router := mux.NewRouter()
 	godotenv.Load()
 
-	router.HandleFunc("/api/applicationDigests/{applicationId}", api.CreateApplicationDigest).Methods("POST")
-	router.HandleFunc("/api/applicationDigests/{applicationId}", api.RemoveApplicationDigest).Methods("DELETE")
+	router.HandleFunc("/api/application-digests/{applicationId}", api.CreateApplicationDigest).Methods("POST")
+	router.HandleFunc("/api/application-digests/{applicationId}", api.RemoveApplicationDigest).Methods("DELETE")
 
 	services.ExecuteRunningJobs()
 
